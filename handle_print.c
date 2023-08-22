@@ -23,8 +23,11 @@ fmtt_t fmt_types[] = {
 {'r', print_revers}, {'R', print_rot13str}, {'\0', NULL}
 };
 for (i = 0; fmt_types[i].fmtt != '\0'; i++)
+
+{
 	if (fmtt[*ind] == fmt_types[i].fmtt)
-		return (fmt_types[i].fn(list, buffer, flagss, wid, precis, size));
+	return (fmt_types[i].fn(list, buffer, flagss, wid, precis, size));
+}
 
 	if (fmt_types[i].fmtt == '\0')
 	{
