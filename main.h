@@ -56,7 +56,7 @@ int print_integ(va_list types, char buff[],
 	int flagss, int wid, int preci, int size);
 int print_binar(va_list types, char buff[],
 	int flagss, int wid, int preci, int size);
-int print_unsigned(va_list types, char buff[],
+int print_unsignedd(va_list types, char buff[],
 	int flagss, int wid, int preci, int size);
 int print_octal(va_list types, char buff[],
 	int flagss, int wid, int preci, int size);

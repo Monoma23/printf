@@ -1,4 +1,4 @@
-#iclude "main.h"
+#include "main.h"
 /**
  * get_size - calculates the size to cast the arg
  * @format: formatted string in which to print the args
