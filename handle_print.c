@@ -1,53 +1,54 @@
 #include "main.h"
 /**
- * handle_print - Prints an arg based on its typ
- * @fmtt: Formatted str in which to print args
- * @list: List of args to be prind
- * @ind: ind
- * @buffer: Buffer array to handle print
- * @flagss: Calcul act flag
- * @wid: get wid
- * @precis: precis specifi
- * @size: Size specifir
+ * handle_print - Prints an argument based on its type
+ * @fmt: Formatted string in which to print the args
+ * @list: List of arg to be printed.
+ * @ind: ind.
+ * @buffer: Buffer array to handle prt
+ * @flags: Calculates active flags
+ * @width: get wid
+ * @precision: Precision specifi
+ * @size: Size specif
  * Return: 1 or 2;
  */
-int handle_print(const char *fmtt, int *ind, va_list list, char buffer[],
-int flagss, int wid, int precis, int size)
+int handle_print(const char *fmt, int *ind, va_list list, char buffer[],
+	int flags, int width, int precision, int size)
 {
-int i, unknow_len = 0, printed_chars = -1;
-fmtt_t fmt_types[] = {
-{'c', print_charachter}, {'s', print_str}, {'%', print_percnt},
-{'i', print_integ}, {'d', print_integ}, {'b', print_binar},
-{'u', print_unsignedd}, {'o', print_octal}, {'x', print_hexad},
-{'X', print_hexa_upper}, {'p', print_ptr}, {'S', print_non_printable},
-{'r', print_revers}, {'R', print_rot13str}, {'\0', NULL}
-};
-for (i = 0; fmt_types[i].fmtt != '\0'; i++)
+	int i, unknow_len = 0, printed_chars = -1;
+	fmt_t fmt_types[] = {
+		{'c', printt_charr}, {'s', print_str}, {'%', print_percentg},
+		{'i', print_integ}, {'d', print_integ}, {'b', print_binary},
+		{'u', print_unsigned}, {'o', print_octall}, {'x', print_hexxadecimal},
+		{'X', print_hexxa_uper}, {'p', print_ptr}, {'S', print_non_printabl},
+		{'r', print_reverse}, {'R', print_rot13str}, {'\0', NULL}
+	};
+	for (i = 0; fmt_types[i].fmt != '\0'; i++)
+		if (fmt[*ind] == fmt_types[i].fmt)
+			return (fmt_types[i].fn(list, buffer, flags, width, precision, size));
 
-{
-	if (fmtt[*ind] == fmt_types[i].fmtt)
-	return (fmt_types[i].fn(list, buffer, flagss, wid, precis, size));
-}
-
-	if (fmt_types[i].fmtt == '\0')
+	if (fmt_types[i].fmt == '\0')
 	{
-		if (fmtt[*ind] == '\0')
+		if (fmt[*ind] == '\0')
 			return (-1);
 		unknow_len += write(1, "%%", 1);
-		if (fmtt[*ind - 1] == ' ')
+		if (fmt[*ind - 1] == ' ')
 			unknow_len += write(1, " ", 1);
-		else if (wid)
+		else if (width)
+		
 		{
 			--(*ind);
-			while (fmtt[*ind] != ' ' && fmtt[*ind] != '%')
+			while (fmt[*ind] != ' ' && fmt[*ind] != '%')
 				--(*ind);
-			if (fmtt[*ind] == ' ')
+			if (fmt[*ind] == ' ')
 				--(*ind);
 			return (1);
 		}
-		unknow_len += write(1, &fmtt[*ind], 1);
+
+		unknow_len += write(1, &fmt[*ind], 1);
 		return (unknow_len);
 	}
-return (printed_chars);
+	
+	return (printed_chars);
 }
+
 
